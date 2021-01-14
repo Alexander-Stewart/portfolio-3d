@@ -1,0 +1,167 @@
+<html>
+  <head>
+    <!-- Add all of the scripts here. Any new aframe scripts must be put under
+         The aframe.io script.
+       -->
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script type="text/javascript" src="../src/components/ortho.js"></script>
+    <script type="text/javascript" src="../src/components/objectHover.js"></script>
+    <script type="text/javascript" src="../src/components/hoverAnimation.js"></script>
+    <script type="text/javascript" src="../src/components/soundController.js"></script>
+  </head>
+  <body>
+    <a-scene renderer="colorManagement: true;" cursor="rayOrigin: mouse" gui-env>
+      <a-assets> <!-- add the gltf models here -->
+        <a-asset-item id="walls" src="../gltf/walls.glb"></a-asset-item>
+        <a-asset-item id="couch" src="../gltf/couch.glb"></a-asset-item>
+        <a-asset-item id="music_system" src="../gltf/music_system.glb"></a-asset-item>
+        <a-asset-item id="computer_desk" src="../gltf/computer_desk.glb"></a-asset-item>
+        <a-asset-item id="shelf" src="../gltf/shelf.glb"></a-asset-item>
+        <audio id="covid-23" src="./src/audio/covid-23.mp3" preload="auto"></audio>
+        <audio id="ani" src="./src/audio/ani.mp3" preload="auto"></audio>
+      </a-assets>
+
+      <a-entity environment="preset: dream; groundColor: #445; groundTexture: none; ground: none; dressing: none"></a-entity>
+
+      <a-entity id="rig" position="2.769 1.302 -3.15" rotation="0 157 0">
+        <a-entity id="camera" camera look-controls rotation="-42.6 -22 0">
+        </a-entity>
+      </a-entity>
+
+      <a-gui-flex-container
+      flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1"
+      opacity="0.7" width="3.5" height="3.5" scale=".5 .5 .5"
+      position="2.66 1.455 -4.86" rotation="0 0 0" look-at="[camera]">
+        <a-gui-flex-container
+        flex-direction="row" justify-content="center" align-items="normal" component-padding=".1"
+        width="3.5" height="1.5"
+        rotation="0 0 0" look-at="[camera]">
+          <a-gui-button
+          width="0.75" height="0.75"
+          onclick="prev"
+          value="<"
+          margin=".1 .1 .1 .1"
+          >
+          </a-gui-button>
+          <a-gui-button
+          width="0.75" height="0.75"
+          onclick="playPause"
+          value="play/pause"
+          margin=".1 .1 .1 .1"
+          toggle="true"
+          >
+          </a-gui-button>
+          <a-gui-button
+          width="0.75" height="0.75"
+          onclick="next"
+          value=">"
+          margin=".1 .1 .1 .1"
+          >
+          </a-gui-button>
+        </a-gui-flex-container>
+        <a-gui-button
+        width="0.5" height="0.5"
+        onclick="testButtonAction"
+        value="x"
+        margin=".1 .1 .1 .1"
+        >
+        </a-gui-button>
+      </a-gui-flex-container>
+
+      <a-entity gltf-model="#walls"
+                  scale="1 1 1"
+                  position="0 0 0"
+                  rotation="0 0 0"
+                  renderer="antialias: true;
+                   colorManagement: true;
+                   physicallyCorrectLights: true;">
+      </a-entity>
+
+      <a-entity gltf-model="#couch"
+                    scale="1 1 1"
+                    position="0 0 0"
+                    rotation="0 0 0"
+                    renderer="antialias: true;
+                     colorManagement: true;
+                     physicallyCorrectLights: true;">
+      </a-entity>
+
+      <a-entity>
+        <a-entity gltf-model="#music_system"
+                        scale="1 1 1"
+                        position="0 0 0"
+                        rotation="0 0 0"
+                        renderer="antialias: true;
+                         colorManagement: true;
+                         physicallyCorrectLights: true;"
+                        name-on-hover="target: #music_hover"
+                        >
+        </a-entity>
+        <a-gui-flex-container
+        id="music_hover"
+        flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1"
+        opacity="0.7" width="3.5" height="1"
+        position="2.66 1.455 -4.86" rotation="0 0 0" scale="1 .00001 1" look-at="[camera]"
+        hover-animation
+        >
+        <a-gui-label
+        width="2.5" height="0.75"
+        value="Music"
+        font-family="Arial"
+        margin="0 0 0.05 0">
+        </a-gui-label>
+        </a-gui-flex-container>
+        <a-entity id="sound-controller" sound sound-controller="songs: ani, covid-23" position="2.66 0.455 -4.86"/>
+      </a-entity>
+
+      <a-entity>
+        <a-entity gltf-model="#computer_desk"
+                    scale="1 1 1"
+                    position="0 0 0"
+                    rotation="0 0 0"
+                    renderer="antialias: true;
+                     colorManagement: true;
+                     physicallyCorrectLights: true;"
+                    name-on-hover="target: #computer_hover">
+        </a-entity>
+        <a-gui-flex-container
+         id="computer_hover"
+        flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1"
+        opacity="0.7" width="3.5" height="1"
+        position=".645 1.765 -1.968" rotation="0 0 0" scale="1 .00001 1" look-at="[camera]"
+        hover-animation
+        >
+           <a-gui-label
+             width="2.5" height="0.75"
+             value="work"
+             font-family="Arial"
+             margin="0 0 0.05 0">
+           </a-gui-label>
+        </a-gui-flex-container>
+    </a-entity>
+
+      <a-entity gltf-model="#shelf"
+                  scale="1 1 1"
+                  position="0 0 0"
+                  rotation="0 0 0"
+                  renderer="antialias: true;
+                   colorManagement: true;
+                   physicallyCorrectLights: true;">
+      </a-entity>
+
+      <a-sky color="#ECECEC"></a-sky>
+
+    </a-scene>
+  </body>
+</html>
+
+
+<!-- <a-gui-flex-container
+flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1"
+opacity="0.7" width="3.5" height="4.5"
+position="-2 2.5 -6" rotation="0 0 0" look-at="[camera]"
+>
+</a-gui-flex-container> -->

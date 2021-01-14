@@ -1,0 +1,28 @@
+{
+  "name": "portfolio-3d",
+  "version": "1.0.0",
+  "description": "3d portfolio using a-frame.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexander-Stewart/portfolio-3d.git"
+  },
+  "keywords": [
+    "3d",
+    "portfolio",
+    "art"
+  ],
+  "author": "astewar2",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alexander-Stewart/portfolio-3d/issues"
+  },
+  "homepage": "https://github.com/Alexander-Stewart/portfolio-3d#readme",
+  "dependencies": {
+    "aframe": "^1.1.0",
+    "browserify": "^17.0.0"
+  }
+}
